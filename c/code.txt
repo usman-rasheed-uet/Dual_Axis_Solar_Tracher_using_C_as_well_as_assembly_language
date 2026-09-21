@@ -1,0 +1,84 @@
+#include <p18f452.h>
+#define ldr1 PORTBbits.RB0
+#define ldr2 PORTBbits.RB1
+
+ 
+void mstime (unsigned int);
+
+unsigned int k=0;
+unsigned int count=1;
+
+void main (void)
+{
+    TRISBbits.TRISB0=1;
+    TRISBbits.TRISB1=1;
+    
+    TRISC =0x00;
+    TRISD =0x00;
+    
+    while(1)
+    {
+        while (ldr1 == ldr2)
+    {
+        PORTD=0;
+       
+         
+   if (count==1)
+    {
+       while(k<25)
+       {
+       PORTC=0x99;
+       mstime(10);
+       PORTC=0XCC;
+       mstime(10);
+       PORTC=0x66;
+       mstime(10);
+       PORTC=0x33;
+       k++;
+       }
+         
+    }
+    
+    }
+    while(ldr1 == 1)
+    {
+        for(;;)
+        {
+       PORTD=0x99;
+       mstime(10);
+       PORTD=0XCC;
+       mstime(10);
+       PORTD=0x66;
+       mstime(10);
+       PORTD=0x33;
+       mstime(10);
+       count++;
+        }   
+    }
+    while(ldr2 == 1)
+    {
+        for(;;)
+        {
+       PORTD=0x33;
+       mstime(10);
+       PORTD=0X66;
+       mstime(10);
+       PORTD=0xcc;
+       mstime(10);
+       PORTD=0x99;
+       mstime(10);
+       count++;
+        }   
+    }
+   
+    
+return;
+}
+}
+  void mstime(unsigned int itime)
+{
+    unsigned int i; unsigned char j;
+    for(i=0;i<itime;i++)
+        for(j=0;j<165;j++);
+    }
+
